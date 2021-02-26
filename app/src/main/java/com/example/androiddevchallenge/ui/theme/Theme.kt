@@ -20,6 +20,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
     primary = purple200,
@@ -28,19 +29,23 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = purple500,
-    primaryVariant = purple700,
-    secondary = teal200
-
-        /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
+    primary = red900,
+    primaryVariant = red700,
+    secondary = red900,
+    background = yellow900,
+    surface = yellow900_alt,
     onPrimary = Color.White,
-    onSecondary = Color.Black,
+    onSecondary = Color.White,
     onBackground = Color.Black,
     onSurface = Color.Black,
-    */
 )
+
+private val OverlayColorPalette = lightColors(
+    primary = yellow900_alt_40_alpha,
+    onPrimary = Color.Black,
+)
+
+private val WelcomeColorPalette = LightColorPalette.copy(background = yellow900)
 
 @Composable
 fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
@@ -52,7 +57,27 @@ fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() (
 
     MaterialTheme(
         colors = colors,
-        typography = typography,
+        typography = welcomeTypography,
+        shapes = shapes,
+        content = content
+    )
+}
+
+@Composable
+fun WelcomeTheme(content: @Composable() () -> Unit) {
+    MaterialTheme(
+        colors = WelcomeColorPalette,
+        typography = welcomeTypography,
+        shapes = shapes,
+        content = content
+    )
+}
+
+@Composable
+fun OverlayTheme(content: @Composable() () -> Unit) {
+    MaterialTheme(
+        colors = OverlayColorPalette,
+        typography = welcomeTypography,
         shapes = shapes,
         content = content
     )

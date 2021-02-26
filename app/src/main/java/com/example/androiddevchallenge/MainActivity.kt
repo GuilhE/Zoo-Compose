@@ -18,11 +18,17 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.rememberNavController
+import com.example.androiddevchallenge.ui.AnimalDetail
+import com.example.androiddevchallenge.ui.AnimalList
+import com.example.androiddevchallenge.ui.Welcome
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -36,15 +42,25 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-// Start building your app here!
 @Composable
+@Preview
 fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+    val controller = rememberNavController()
+    NavHost(navController = controller, startDestination = "welcome") {
+        composable("welcome") {
+            Welcome {
+                controller.popBackStack()
+                controller.navigate("list")
+            }
+        }
+        composable("list") { AnimalList { animal -> controller.navigate("detail/${animal.name}") } }
+        composable("detail/{id}", arguments = listOf(navArgument("id") { type = NavType.StringType })) {
+            it.arguments?.getString("id")?.let { id -> AnimalDetail(id, onBack = { controller.popBackStack() }) }
+        }
     }
 }
 
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
+// @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun LightPreview() {
     MyTheme {
@@ -52,7 +68,7 @@ fun LightPreview() {
     }
 }
 
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+// @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {

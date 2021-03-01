@@ -14,18 +14,18 @@
 
     <application
             android:allowBackup="true"
+            android:fullBackupOnly="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.AndroidDevChallenge">
+            android:theme="@style/Zoo">
         <activity
                 android:name="com.example.androiddevchallenge.MainActivity"
                 android:label="@string/app_name"
-                android:theme="@style/Theme.AndroidDevChallenge.NoActionBar">
+                android:theme="@style/Zoo.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

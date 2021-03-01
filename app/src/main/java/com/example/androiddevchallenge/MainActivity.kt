@@ -19,7 +19,6 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -29,22 +28,21 @@ import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.ui.AnimalDetail
 import com.example.androiddevchallenge.ui.AnimalList
 import com.example.androiddevchallenge.ui.Welcome
-import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.ui.theme.AppTheme
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyTheme {
-                MyApp()
+            AppTheme {
+                Zoo()
             }
         }
     }
 }
 
 @Composable
-@Preview
-fun MyApp() {
+fun Zoo() {
     val controller = rememberNavController()
     NavHost(navController = controller, startDestination = "welcome") {
         composable("welcome") {
@@ -57,21 +55,5 @@ fun MyApp() {
         composable("detail/{id}", arguments = listOf(navArgument("id") { type = NavType.StringType })) {
             it.arguments?.getString("id")?.let { id -> AnimalDetail(id, onBack = { controller.popBackStack() }) }
         }
-    }
-}
-
-// @Preview("Light Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun LightPreview() {
-    MyTheme {
-        MyApp()
-    }
-}
-
-// @Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-    MyTheme(darkTheme = true) {
-        MyApp()
     }
 }

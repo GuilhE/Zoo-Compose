@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.GridCells
@@ -47,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.repository.Animal
 import com.example.androiddevchallenge.repository.DataSource
+import com.example.androiddevchallenge.ui.theme.AppTheme
 
 @Composable
 private fun AppBar(title: String = stringResource(R.string.app_name)) {
@@ -70,7 +72,7 @@ fun AnimalList(onSelected: (Animal) -> Unit) {
 }
 
 @Composable
-fun AnimalListItem(animal: Animal, onSelected: (Animal) -> Unit) {
+private fun AnimalListItem(animal: Animal, onSelected: (Animal) -> Unit) {
     Box {
         Card(
             shape = RoundedCornerShape(8.dp),
@@ -94,18 +96,30 @@ fun AnimalListItem(animal: Animal, onSelected: (Animal) -> Unit) {
 
 @Composable
 @Preview
-fun MockList() {
-    AnimalList {}
+fun MockListItem() {
+    val animal = Animal(
+        "Crocodile",
+        R.drawable.crocodile,
+        "Crocodiles (subfamily Crocodylinae) or true crocodiles are large semiaquatic reptiles that live throughout the tropics in Africa, Asia, the Americas and Australia."
+    )
+    Row {
+        AppTheme { AnimalListItem(animal) {} }
+        AppTheme(darkTheme = true) { AnimalListItem(animal) {} }
+    }
 }
 
 @Composable
 @Preview
-fun MockListItem() {
-    AnimalListItem(
-        Animal(
-            "Crocodile",
-            R.drawable.crocodile,
-            "Crocodiles (subfamily Crocodylinae) or true crocodiles are large semiaquatic reptiles that live throughout the tropics in Africa, Asia, the Americas and Australia."
-        )
-    ) {}
+fun MockList() {
+    AppTheme {
+        AnimalList {}
+    }
+}
+
+@Composable
+@Preview
+fun MockDarkList() {
+    AppTheme(darkTheme = true) {
+        AnimalList {}
+    }
 }

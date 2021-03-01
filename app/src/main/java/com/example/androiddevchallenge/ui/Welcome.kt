@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -30,49 +29,51 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.androiddevchallenge.R
-import com.example.androiddevchallenge.ui.theme.WelcomeTheme
+import com.example.androiddevchallenge.ui.theme.AppTheme
+import com.example.androiddevchallenge.ui.theme.ButtonTheme
 
 @Composable
 fun Welcome(onEnter: () -> Unit) {
-    WelcomeTheme {
-        Surface(color = MaterialTheme.colors.background) {
-            Box(Modifier.fillMaxSize()) {
-                ConstraintLayout {
-                    val (title, host, button) = createRefs()
-
-                    Box(
-                        Modifier
-                            .fillMaxWidth()
-                            .constrainAs(title) {
-                                top.linkTo(parent.top)
-                                start.linkTo(parent.start)
-                                end.linkTo(parent.end)
-                            }
-                            .padding(20.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.lbl_welcome),
-                            style = MaterialTheme.typography.h2,
-                        )
-                        Text(
-                            text = stringResource(R.string.lbl_welcome_desc),
-                            style = MaterialTheme.typography.h5,
-                            modifier = Modifier.padding(start = 50.dp, top = 65.dp)
-                        )
-                    }
-                    Image(
-                        painter = painterResource(R.drawable.welcome),
-                        contentDescription = null,
-                        Modifier
-                            .fillMaxSize()
-                            .constrainAs(host) {
-                                centerTo(parent)
-                            }
+    Surface(color = MaterialTheme.colors.background) {
+        Box(Modifier.fillMaxSize()) {
+            ConstraintLayout {
+                val (title, host, button) = createRefs()
+                Image(
+                    painter = painterResource(R.drawable.welcome),
+                    contentDescription = stringResource(R.string.lbl_welcome) + stringResource(R.string.lbl_welcome_desc),
+                    Modifier
+                        .fillMaxSize()
+                        .constrainAs(host) {
+                            centerTo(parent)
+                        }
+                )
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .constrainAs(title) {
+                            top.linkTo(parent.top)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                        }
+                        .padding(20.dp)
+                        .semantics(mergeDescendants = true) {}
+                ) {
+                    Text(
+                        text = stringResource(R.string.lbl_welcome),
+                        style = MaterialTheme.typography.h2,
                     )
+                    Text(
+                        text = stringResource(R.string.lbl_welcome_desc),
+                        style = MaterialTheme.typography.h5,
+                        modifier = Modifier.padding(start = 50.dp, top = 65.dp)
+                    )
+                }
+                ButtonTheme {
                     Button(
                         onClick = { onEnter.invoke() },
                         modifier = Modifier
@@ -83,8 +84,7 @@ fun Welcome(onEnter: () -> Unit) {
                                 start.linkTo(parent.start)
                                 end.linkTo(parent.end)
                             },
-                        shape = RoundedCornerShape(10.dp),
-                        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
+                        shape = RoundedCornerShape(10.dp)
                     ) {
                         Text(
                             text = stringResource(R.string.btn_enter),
@@ -101,5 +101,15 @@ fun Welcome(onEnter: () -> Unit) {
 @Composable
 @Preview
 fun MockWelcome() {
-    Welcome { }
+    AppTheme {
+        Welcome { }
+    }
+}
+
+@Composable
+@Preview
+fun MockDarkWelcome() {
+    AppTheme(darkTheme = true) {
+        Welcome { }
+    }
 }

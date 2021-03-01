@@ -55,6 +55,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -64,6 +65,8 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.repository.DataSource
+import com.example.androiddevchallenge.ui.theme.AppTheme
+import com.example.androiddevchallenge.ui.theme.ButtonTheme
 import com.example.androiddevchallenge.ui.theme.OverlayTheme
 import kotlinx.coroutines.launch
 import kotlin.math.min
@@ -171,13 +174,15 @@ fun AnimalDetail(id: String, onBack: () -> Unit) {
                                     modifier = Modifier
                                         .padding(start = 50.dp)
                                         .graphicsLayer { alpha = barTitleAlpha }
+                                        .clearAndSetSemantics { }
+
                                 )
                             }
                         }
                         IconButton(modifier = Modifier.fillMaxHeight(), onClick = { onBack.invoke() }) {
                             Icon(
                                 imageVector = Icons.Filled.ArrowBack,
-                                contentDescription = "back",
+                                contentDescription = stringResource(R.string.acc_navigation_back),
                                 tint = MaterialTheme.colors.onSurface
                             )
                         }
@@ -191,17 +196,25 @@ fun AnimalDetail(id: String, onBack: () -> Unit) {
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun AdoptFloatingActionButton(extended: Boolean, onClick: () -> Unit) {
-    FloatingActionButton(onClick = onClick) {
-        Row(modifier = Modifier.padding(horizontal = 16.dp)) {
-            Image(
-                painter = painterResource(if (extended) R.drawable.ic_heart else R.drawable.ic_heart_full),
-                contentDescription = null
-            )
-            AnimatedVisibility(visible = extended) {
-                Text(
-                    text = stringResource(R.string.btn_adopt),
-                    modifier = Modifier.padding(start = 8.dp, top = 3.dp)
+    ButtonTheme {
+        FloatingActionButton(
+            onClick = onClick,
+            backgroundColor = MaterialTheme.colors.primary,
+            contentColor = MaterialTheme.colors.onPrimary
+        ) {
+            Row(modifier = Modifier.padding(horizontal = 16.dp)) {
+                Image(
+                    painter = painterResource(if (extended) R.drawable.ic_heart else R.drawable.ic_heart_full),
+                    contentDescription = stringResource(if (extended) R.string.acc_adopt_fab else R.string.acc_adopt_success)
                 )
+                AnimatedVisibility(visible = extended) {
+                    Text(
+                        text = stringResource(R.string.btn_adopt),
+                        modifier = Modifier
+                            .padding(start = 8.dp, top = 3.dp)
+                            .clearAndSetSemantics { }
+                    )
+                }
             }
         }
     }
@@ -209,7 +222,7 @@ private fun AdoptFloatingActionButton(extended: Boolean, onClick: () -> Unit) {
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun Confetti(show: Boolean) {
+private fun Confetti(show: Boolean) {
     // using a repeatable animationSpec with Reverse would reset to final state after animation was complete...
     val fadeIn: Float by animateFloatAsState(
         targetValue = if (show) 1f else 0f,
@@ -264,6 +277,14 @@ fun Confetti(show: Boolean) {
 @Preview
 fun MockDetail() {
     AnimalDetail("Dino") {}
+}
+
+@Composable
+@Preview
+fun MockDarkDetail() {
+    AppTheme(darkTheme = true) {
+        AnimalDetail("Crocodile") {}
+    }
 }
 
 @Composable

@@ -23,8 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-    primary = purple200,
-    primaryVariant = purple700,
+    primary = teal200,
+    primaryVariant = teal700,
     secondary = teal200
 )
 
@@ -34,50 +34,54 @@ private val LightColorPalette = lightColors(
     secondary = red900,
     background = yellow900,
     surface = yellow900_alt,
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
+    onSecondary = Color.White
 )
 
-private val OverlayColorPalette = lightColors(
-    primary = yellow900_alt_40_alpha,
+private val lightOverlayColorPalette = lightColors(
+    primary = yellow900_alt_70_alpha,
     onPrimary = Color.Black,
 )
 
-private val WelcomeColorPalette = LightColorPalette.copy(background = yellow900)
+private val darkOverlayColorPalette = lightColors(
+    primary = black_70_alpha,
+    onPrimary = Color.Black,
+)
+
+private val lightButtonColorPalette = lightColors(
+    primary = red900,
+    onPrimary = Color.White,
+)
+
+private val darkButtonColorPalette = darkColors(
+    primary = teal200,
+    onPrimary = Color.White,
+)
 
 @Composable
-fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
-
+fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     MaterialTheme(
-        colors = colors,
-        typography = welcomeTypography,
+        colors = if (darkTheme) DarkColorPalette else LightColorPalette,
+        typography = mainTypography,
         shapes = shapes,
         content = content
     )
 }
 
 @Composable
-fun WelcomeTheme(content: @Composable() () -> Unit) {
+fun OverlayTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     MaterialTheme(
-        colors = WelcomeColorPalette,
-        typography = welcomeTypography,
+        colors = if (darkTheme) darkOverlayColorPalette else lightOverlayColorPalette,
+        typography = mainTypography,
         shapes = shapes,
         content = content
     )
 }
 
 @Composable
-fun OverlayTheme(content: @Composable() () -> Unit) {
+fun ButtonTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     MaterialTheme(
-        colors = OverlayColorPalette,
-        typography = welcomeTypography,
+        colors = if (darkTheme) darkButtonColorPalette else lightButtonColorPalette,
+        typography = mainTypography,
         shapes = shapes,
         content = content
     )

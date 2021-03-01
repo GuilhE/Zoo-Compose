@@ -22,7 +22,6 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter()
     }
 
     dependencies {
@@ -39,7 +38,12 @@ subprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+        //noinspection JcenterRepositoryObsolete
+        jcenter {
+            content {
+                includeModule("org.jetbrains.kotlinx", "kotlinx-collections-immutable-jvm")
+            }
+        }
     }
 
     apply plugin: 'com.diffplug.spotless'

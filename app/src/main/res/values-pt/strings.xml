@@ -9,16 +9,14 @@
       or implied. See the License for the specific language governing permissions and limitations under
       the License.
       -->
-    <string name="app_name" translatable="false">Zoo</string>
+    <string name="lbl_welcome">Bem-vindo</string>
+    <string name="lbl_welcome_desc">ao Zoo da adopção!</string>
 
-    <string name="lbl_welcome">Welcome</string>
-    <string name="lbl_welcome_desc">to adoption Zoo!</string>
-
-    <string name="btn_adopt">Adopt me</string>
-    <string name="btn_enter">Adopt a Friend</string>
+    <string name="btn_adopt">Adopta-me</string>
+    <string name="btn_enter">Adoptar um Amigo</string>
 
     <string name="acc_start">@string/btn_enter</string>
-    <string name="acc_navigation_back">Navigation back</string>
+    <string name="acc_navigation_back">Navegação anterior</string>
     <string name="acc_adopt_fab">@string/btn_adopt</string>
-    <string name="acc_adopt_success">Adoption successful</string>
+    <string name="acc_adopt_success">Adopção com sucesso</string>
 </resources>

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.theme
+package com.github.guilhe.zoocompose.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -23,9 +23,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-    primary = teal200,
-    primaryVariant = teal700,
-    secondary = teal200
+    primary = teal700,
+    primaryVariant = teal700_alt,
+    secondary = teal700,
+    onPrimary = Color.White
 )
 
 private val LightColorPalette = lightColors(
@@ -34,6 +35,7 @@ private val LightColorPalette = lightColors(
     secondary = red900,
     background = yellow900,
     surface = yellow900_alt,
+    onPrimary = Color.White,
     onSecondary = Color.White
 )
 
@@ -53,7 +55,7 @@ private val lightButtonColorPalette = lightColors(
 )
 
 private val darkButtonColorPalette = darkColors(
-    primary = teal200,
+    primary = teal700,
     onPrimary = Color.White,
 )
 

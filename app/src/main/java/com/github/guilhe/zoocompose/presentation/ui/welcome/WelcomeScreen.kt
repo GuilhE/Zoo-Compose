@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui
+package com.github.guilhe.zoocompose.presentation.ui.welcome
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -33,12 +33,12 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.androiddevchallenge.R
-import com.example.androiddevchallenge.ui.theme.AppTheme
-import com.example.androiddevchallenge.ui.theme.ButtonTheme
+import com.github.guilhe.zoocompose.R
+import com.github.guilhe.zoocompose.presentation.theme.AppTheme
+import com.github.guilhe.zoocompose.presentation.theme.ButtonTheme
 
 @Composable
-fun Welcome(onEnter: () -> Unit) {
+fun WelcomeScreen(onEnter: () -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
         Box(Modifier.fillMaxSize()) {
             ConstraintLayout {
@@ -84,7 +84,7 @@ fun Welcome(onEnter: () -> Unit) {
                                 start.linkTo(parent.start)
                                 end.linkTo(parent.end)
                             },
-                        shape = RoundedCornerShape(10.dp)
+                        shape = RoundedCornerShape(10.dp),
                     ) {
                         Text(
                             text = stringResource(R.string.btn_enter),
@@ -100,16 +100,16 @@ fun Welcome(onEnter: () -> Unit) {
 
 @Composable
 @Preview
-fun MockWelcome() {
+private fun MockWelcome() {
     AppTheme {
-        Welcome { }
+        WelcomeScreen { }
     }
 }
 
 @Composable
 @Preview
-fun MockDarkWelcome() {
+private fun MockDarkWelcome() {
     AppTheme(darkTheme = true) {
-        Welcome { }
+        WelcomeScreen { }
     }
 }

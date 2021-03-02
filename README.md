@@ -3,14 +3,14 @@
 ![Workflow result](https://github.com/GuilhE/JetpackChallenge/workflows/Check/badge.svg)
 
 ## :scroll: Description
-Why adopt a cat or a dog when you can adopt a Zoo! 😃
+Why adopt a cat or a dog when you can adopt an entire Zoo! 😃
 
 ## :bulb: Motivation and Context
-This challenge motivated me to finally get my hands on Jetpack Compose, let's see where it takes me.
+This challenge motivated me to finally get my hands on Jetpack Compose, let's see where it takes me from here.
 
 ## :camera_flash: Screenshots
-<img src="/results/screenshot_welcome.png" width="260">&emsp;<img src="/results/screenshot_1.png" width="260">
-<img src="/results/screenshot_2.png" width="260">&emsp;<img src="/results/screenshot_adopted.png" width="260"> <img src="/results/video.gif" width="260">
+<img src="/results/screenshot_welcome.png" width="260"> <img src="/results/screenshot_1.png" width="260">
+<img src="/results/screenshot_2.png" width="260"> <img src="/results/screenshot_adopted.png" width="260"> <img src="/results/video.gif" width="260">
 
 ## License
 ```

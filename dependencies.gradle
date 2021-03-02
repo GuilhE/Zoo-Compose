@@ -1,0 +1,9 @@
+ext.versions = [
+        kotlin_version    : '1.4.30',
+        compose_version   : '1.0.0-beta01',
+        coroutines_version: '1.4.2',
+        hiltCoreVersion   : '2.33-beta',
+        hiltVersion       : '1.0.0-alpha03',
+        startupVersion    : '1.0.0',
+        androidx_lifecycle: '2.3.0'
+]

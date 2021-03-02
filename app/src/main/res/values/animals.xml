@@ -1,0 +1,41 @@
+<resources>
+    <string name="bat_name">Bat</string>
+    <string name="bat_desc">"""Bats are mammals of the order Chiroptera. With their forelimbs adapted as wings, they are the only mammals capable of true and sustained flight. Bats are more manoeuvrable than birds, flying with their very long spread-out digits covered with a thin membrane or patagium. The smallest bat, and arguably the smallest extant mammal, is Kitti's hog-nosed bat, which is 29–34 millimetres (1 1⁄8–1 3⁄8 inches) in length, 150 mm (6 in) across the wings and 2–2.6 g (1⁄16–3⁄32 oz) in mass. The largest bats are the flying foxes and the giant golden-crowned flying fox, Acerodon jubatus, which can weigh 1.6 kg (3 1⁄2 lb) and have a wingspan of 1.7 m (5 ft 7 in).
+        The second largest order of mammals after rodents, bats comprise about 20% of all classified mammal species worldwide, with over 1,400 species. These were traditionally divided into two suborders: the largely fruit-eating megabats, and the echolocating microbats. But more recent evidence has supported dividing the order into Yinpterochiroptera and Yangochiroptera, with megabats as members of the former along with several species of microbats. Many bats are insectivores, and most of the rest are frugivores (fruit-eaters) or nectarivores (nectar-eaters). A few species feed on animals other than insects; for example, the vampire bats feed on blood. Most bats are nocturnal, and many roost in caves or other refuges; it is uncertain whether bats have these behaviours to escape predators. Bats are present throughout the world, with the exception of extremely cold regions. They are important in their ecosystems for pollinating flowers and dispersing seeds; many tropical plants depend entirely on bats for these services."""</string>
+    <string name="cat_name">Cat</string>
+    <string name="cat_desc">"""The cat (Felis catus) is a domestic species of small carnivorous mammal. It is the only domesticated species in the family Felidae and is often referred to as the domestic cat to distinguish it from the wild members of the family."""</string>
+    <string name="chicken_name">Chicken</string>
+    <string name="chicken_desc">"""The chicken (Gallus gallus domesticus), a subspecies of the red junglefowl, is a type of domesticated fowl."""</string>
+    <string name="crab_name">Crab</string>
+    <string name="crab_desc">"""Crabs are decapod crustaceans of the infraorder Brachyura, which typically have a very short projecting \"tail\" (abdomen), usually hidden entirely under the thorax. They live in all the world's oceans, in fresh water, and on land, are generally covered with a thick exoskeleton, and have a single pair of pincers."""</string>
+    <string name="crocodile_name">Crocodile</string>
+    <string name="crocodile_desc">"""Crocodiles (subfamily Crocodylinae) or true crocodiles are large semiaquatic reptiles that live throughout the tropics in Africa, Asia, the Americas and Australia."""</string>
+    <string name="dino_name">Dino</string>
+    <string name="dino_desc">"""Dinosaurs are a diverse group of reptiles of the clade Dinosauria. They first appeared during the Triassic period, between 243 and 233.23 million years ago, although the exact origin and timing of the evolution of dinosaurs is the subject of active research."""</string>
+    <string name="dog_name">Dog</string>
+    <string name="dog_desc">"""The domestic dog (Canis familiaris when considered a separate species or Canis lupus familiaris when considered a subspecies of the wolf) is a wolf-like canid that can be found distributed around the world."""</string>
+    <string name="eagle_name">Eagle</string>
+    <string name="eagle_desc">"""Eagle is the common name for many large birds of prey of the family Accipitridae. Eagles belong to several groups of genera, some of which are closely related. Most of the 60 species of eagle are from Eurasia and Africa."</string>
+    <string name="fish_name">Fish</string>
+    <string name="fish_desc">"""Fish are gill-bearing aquatic craniate animals that lack limbs with digits. They form a sister group to the tunicates, together forming the olfactores. Included in this definition are the living hagfish, lampreys, and cartilaginous and bony fish as well as various extinct related groups."""</string>
+    <string name="fox_name">Fox</string>
+    <string name="fox_desc">"""Foxes are small to medium-sized, omnivorous mammals belonging to several genera of the family Canidae. Foxes have a flattened skull, upright triangular ears, a pointed, slightly upturned snout, and a long bushy tail (or brush)."""</string>
+    <string name="frog_name">Frog</string>
+    <string name="frog_desc">"""A frog is any member of a diverse and largely carnivorous group of short-bodied, tailless amphibians composing the order Anura (literally without tail in Ancient Greek)."""</string>
+    <string name="lion_name">Lion</string>
+    <string name="lion_desc">"""The lion (Panthera leo) is a species in the family Felidae and a member of the genus Panthera. It has a muscular, deep-chested body, short, rounded head, round ears, and a hairy tuft at the end of its tail."""</string>
+    <string name="mouse_name">Mouse</string>
+    <string name="mouse_desc">"""A mouse, plural mice, is a small rodent. Characteristically, mice are known to have a pointed snout, small rounded ears, a body-length scaly tail, and a high breeding rate."""</string>
+    <string name="rabbit_name">Rabbit</string>
+    <string name="rabbit_desc">"""Rabbits are small mammals in the family Leporidae (along with the hare) of the order Lagomorpha (along with the pika)."""</string>
+    <string name="shark_name">Shark</string>
+    <string name="shark_desc">"""Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head."""</string>
+    <string name="snake_name">Snake</string>
+    <string name="snake_desc">"""Snakes are elongated, legless, carnivorous reptiles of the suborder Serpentes. Like all other squamates, snakes are ectothermic, amniote vertebrates covered in overlapping scales."""</string>
+    <string name="spider_name">Spider</string>
+    <string name="spider_desc">"""Spiders (order Araneae) are air-breathing arthropods that have eight legs, chelicerae with fangs generally able to inject venom, and spinnerets that extrude silk. They are the largest order of arachnids and rank seventh in total species diversity among all orders of organisms."""</string>
+    <string name="turtle_name">Turtle</string>
+    <string name="turtle_desc">"""Turtles are reptiles of the order Chelonia or Testudines. They are characterized by a special bony or cartilaginous shell developed from their ribs that acts as a shield."""</string>
+    <string name="wolf_name">Wolf</string>
+    <string name="wolf_desc">"""The wolf also known as the gray wolf or grey wolf, is a large canine native to Eurasia and North America. More than thirty subspecies of Canis lupus have been recognized, and gray wolves, as colloquially understood, comprise non-domestic/feral subspecies."""</string>
+</resources>

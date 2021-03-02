@@ -17,6 +17,7 @@
         <item name="colorSecondaryVariant">@color/red700</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:windowBackground" tools:targetApi="l">@color/yellow900</item>
     </style>
 
     <style name="Zoo" parent="Main" />

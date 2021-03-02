@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui
+package com.github.guilhe.zoocompose.presentation.ui.detail
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -63,18 +63,22 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.androiddevchallenge.R
-import com.example.androiddevchallenge.repository.DataSource
-import com.example.androiddevchallenge.ui.theme.AppTheme
-import com.example.androiddevchallenge.ui.theme.ButtonTheme
-import com.example.androiddevchallenge.ui.theme.OverlayTheme
+import com.github.guilhe.zoocompose.R
+import com.github.guilhe.zoocompose.data.model.Animal
+import com.github.guilhe.zoocompose.presentation.theme.AppTheme
+import com.github.guilhe.zoocompose.presentation.theme.ButtonTheme
+import com.github.guilhe.zoocompose.presentation.theme.OverlayTheme
 import kotlinx.coroutines.launch
 import kotlin.math.min
 
+@Composable
+fun AnimalDetailScreen(animal: Animal, onBack: () -> Unit) {
+    AnimalDetail(animal, onBack)
+}
+
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AnimalDetail(id: String, onBack: () -> Unit) {
-    val animal = DataSource.animalList().first { it.name == id }
+private fun AnimalDetail(animal: Animal, onBack: () -> Unit) {
     val scrollState = rememberScrollState()
     val imageAlpha = min(1f, 1 - (scrollState.value / 600f))
     val barBgAlpha = min(1f, (scrollState.value / 800f))
@@ -107,11 +111,11 @@ fun AnimalDetail(id: String, onBack: () -> Unit) {
                     val (image, description) = createRefs()
                     Image(
                         painter = painterResource(animal.image),
-                        contentDescription = animal.name,
+                        contentDescription = stringResource(animal.name),
                         alignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(20.dp)
+                            .padding(top = 50.dp, bottom = 20.dp)
                             .graphicsLayer {
                                 alpha = imageAlpha
                                 translationY = -scrollState.value * 0.1f
@@ -124,7 +128,7 @@ fun AnimalDetail(id: String, onBack: () -> Unit) {
                     Column(
                         Modifier
                             .verticalScroll(scrollState)
-                            .padding(top = 220.dp)
+                            .padding(top = 270.dp)
                             .constrainAs(description) {
                                 top.linkTo(parent.top)
                                 start.linkTo(parent.start)
@@ -132,14 +136,14 @@ fun AnimalDetail(id: String, onBack: () -> Unit) {
                             }
                     ) {
                         Text(
-                            animal.name,
+                            stringResource(animal.name),
                             textAlign = TextAlign.Justify,
                             style = MaterialTheme.typography.h4,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(start = 20.dp)
                         )
                         Text(
-                            animal.description,
+                            stringResource(animal.description),
                             textAlign = TextAlign.Justify,
                             style = MaterialTheme.typography.body2,
                             fontWeight = FontWeight.Light,
@@ -167,7 +171,7 @@ fun AnimalDetail(id: String, onBack: () -> Unit) {
                         ) {
                             Row(Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    animal.name,
+                                    stringResource(animal.name),
                                     textAlign = TextAlign.Justify,
                                     style = MaterialTheme.typography.h5,
                                     fontWeight = FontWeight.Bold,
@@ -275,20 +279,26 @@ private fun Confetti(show: Boolean) {
 
 @Composable
 @Preview
-fun MockDetail() {
-    AnimalDetail("Dino") {}
-}
-
-@Composable
-@Preview
-fun MockDarkDetail() {
-    AppTheme(darkTheme = true) {
-        AnimalDetail("Crocodile") {}
+private fun MockDetail() {
+    AppTheme {
+        AnimalDetail(animalMock) {}
     }
 }
 
 @Composable
 @Preview
-fun MockConfetti() {
-    Confetti(true)
+private fun MockDarkDetail() {
+    AppTheme(darkTheme = true) {
+        AnimalDetail(animalMock) {}
+    }
 }
+
+@Composable
+@Preview
+private fun MockConfetti() {
+    AppTheme {
+        Confetti(true)
+    }
+}
+
+private val animalMock = Animal(R.string.crocodile_name, R.drawable.crocodile, R.string.crocodile_desc)

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui
+package com.github.guilhe.zoocompose.presentation.ui.list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -36,7 +36,6 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -45,25 +44,29 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.androiddevchallenge.R
-import com.example.androiddevchallenge.repository.Animal
-import com.example.androiddevchallenge.repository.DataSource
-import com.example.androiddevchallenge.ui.theme.AppTheme
+import com.github.guilhe.zoocompose.R
+import com.github.guilhe.zoocompose.data.model.Animal
+import com.github.guilhe.zoocompose.presentation.theme.AppTheme
+import com.github.guilhe.zoocompose.presentation.ui.main.MainViewModel
 
 @Composable
-private fun AppBar(title: String = stringResource(R.string.app_name)) {
-    TopAppBar(
-        title = { Text(text = title) },
-        backgroundColor = MaterialTheme.colors.primary
-    )
+fun AnimalScreen(viewModel: MainViewModel, onSelected: (Animal) -> Unit) {
+    AnimalList(viewModel.animalList, onSelected)
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun AnimalList(onSelected: (Animal) -> Unit) {
-    val animals = remember { DataSource.animalList() }
+private fun AnimalList(animals: List<Animal>, onSelected: (Animal) -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
-        Scaffold(topBar = { AppBar() }) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(text = stringResource(R.string.app_name)) },
+                    backgroundColor = MaterialTheme.colors.primary,
+                    contentColor = MaterialTheme.colors.onPrimary,
+                )
+            }
+        ) {
             LazyVerticalGrid(cells = GridCells.Adaptive(minSize = 130.dp)) {
                 items(animals) { AnimalListItem(it) { animal -> onSelected.invoke(animal) } }
             }
@@ -85,10 +88,10 @@ private fun AnimalListItem(animal: Animal, onSelected: (Animal) -> Unit) {
             Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
                     painter = painterResource(animal.image),
-                    contentDescription = animal.name,
+                    contentDescription = stringResource(animal.name),
                     modifier = Modifier.size(100.dp)
                 )
-                Text(animal.name, textAlign = TextAlign.Center, style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                Text(stringResource(animal.name), textAlign = TextAlign.Center, style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
             }
         }
     }
@@ -96,30 +99,27 @@ private fun AnimalListItem(animal: Animal, onSelected: (Animal) -> Unit) {
 
 @Composable
 @Preview
-fun MockListItem() {
-    val animal = Animal(
-        "Crocodile",
-        R.drawable.crocodile,
-        "Crocodiles (subfamily Crocodylinae) or true crocodiles are large semiaquatic reptiles that live throughout the tropics in Africa, Asia, the Americas and Australia."
-    )
-    Row {
-        AppTheme { AnimalListItem(animal) {} }
-        AppTheme(darkTheme = true) { AnimalListItem(animal) {} }
-    }
-}
-
-@Composable
-@Preview
-fun MockList() {
+private fun MockList() {
     AppTheme {
-        AnimalList {}
+        AnimalList(listOf(animalMock, animalMock, animalMock, animalMock)) {}
     }
 }
 
 @Composable
 @Preview
-fun MockDarkList() {
+private fun MockDarkList() {
     AppTheme(darkTheme = true) {
-        AnimalList {}
+        AnimalList(listOf(animalMock, animalMock, animalMock, animalMock)) {}
     }
 }
+
+@Composable
+@Preview
+private fun MockListItem() {
+    Row {
+        AppTheme { AnimalListItem(animalMock) {} }
+        AppTheme(darkTheme = true) { AnimalListItem(animalMock) {} }
+    }
+}
+
+private val animalMock = Animal(R.string.crocodile_name, R.drawable.crocodile, R.string.crocodile_desc)

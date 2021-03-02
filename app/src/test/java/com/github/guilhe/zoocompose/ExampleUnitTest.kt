@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.theme
+package com.github.guilhe.zoocompose
 
-import androidx.compose.ui.graphics.Color
-
-val teal200 = Color(0xFF03DAC5)
-val teal700 = Color(0xFF018786)
-val red900 = Color(0xFFBF360C)
-val red700 = Color(0xFF9A0007)
-val yellow900 = Color(0xFFFFF8E1)
-val yellow900_alt = Color(0xFFF3EBCF)
-val yellow900_alt_70_alpha = Color(0xE6F3EBCF)
-val black_70_alpha = Color(0xB3000000)
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    // Add unit tests here
+}

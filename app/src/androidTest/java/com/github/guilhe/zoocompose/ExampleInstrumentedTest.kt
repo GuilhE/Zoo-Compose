@@ -17,7 +17,7 @@ package com.github.guilhe.zoocompose
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.github.guilhe.zoocompose.presentation.main.MainActivity
+import com.github.guilhe.zoocompose.presentation.ui.main.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -17,5 +17,6 @@ package com.github.guilhe.zoocompose.data.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import java.io.Serializable
 
-data class Animal(@StringRes val name: Int, @DrawableRes val image: Int, @StringRes val description: Int)
+data class Animal(@StringRes val name: Int, @DrawableRes val image: Int, @StringRes val description: Int) : Serializable

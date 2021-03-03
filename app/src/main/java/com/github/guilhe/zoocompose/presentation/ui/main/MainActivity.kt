@@ -20,6 +20,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.ExperimentalAnimationApi
 import com.github.guilhe.zoocompose.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,11 +30,13 @@ class MainActivity : AppCompatActivity() {
     @VisibleForTesting
     private val viewModel: MainViewModel by viewModels()
 
+    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                Zoo(viewModel)
+//                Zoo(viewModel)
+                ZooSingleComposable(viewModel)
             }
         }
     }

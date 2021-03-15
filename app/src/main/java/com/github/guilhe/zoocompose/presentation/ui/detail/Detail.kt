@@ -45,8 +45,8 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -84,7 +84,7 @@ private fun AnimalDetail(animal: Animal, onBack: () -> Unit) {
     val barBgAlpha = min(1f, (scrollState.value / 800f))
     val barTitleAlpha = min(1f, (scrollState.value / 1000f))
 
-    var adopted by remember { mutableStateOf(false) }
+    var adopted by rememberSaveable { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
 
     Surface(color = MaterialTheme.colors.surface) {
@@ -179,7 +179,6 @@ private fun AnimalDetail(animal: Animal, onBack: () -> Unit) {
                                         .padding(start = 50.dp)
                                         .graphicsLayer { alpha = barTitleAlpha }
                                         .clearAndSetSemantics { }
-
                                 )
                             }
                         }

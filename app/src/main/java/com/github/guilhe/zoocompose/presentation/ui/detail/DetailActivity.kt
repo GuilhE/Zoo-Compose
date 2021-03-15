@@ -13,37 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.guilhe.zoocompose.presentation.ui.main
+package com.github.guilhe.zoocompose.presentation.ui.detail
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.ExperimentalAnimationApi
 import com.github.guilhe.zoocompose.presentation.theme.AppTheme
-import com.github.guilhe.zoocompose.presentation.ui.list.ListActivity
+import com.github.guilhe.zoocompose.presentation.transition.ActivityTransitionBehavior
+import com.github.guilhe.zoocompose.presentation.transition.SlideHorizontalOnTopTransition
+import com.github.guilhe.zoocompose.presentation.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
 
+    private val transitionBehavior: ActivityTransitionBehavior by lazy { SlideHorizontalOnTopTransition(this) }
     private val viewModel: MainViewModel by viewModels()
 
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
+        transitionBehavior.onCreateTransitions(window)
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-//                ZooWithNavHostMultiComposable(viewModel)
-//                ZooWithNavHostSingleComposable(viewModel)
-                ZooWithOutNavHost(
-                    onEnter = {
-                        startActivity(Intent(this@MainActivity, ListActivity::class.java))
-                        finish()
-                    }
-                )
+                val key = intent.getIntExtra(EXTRA_FOR_ANIMAL_ID, -1)
+                viewModel.animalList.firstOrNull { item -> item.name == key }?.let { animal ->
+                    AnimalDetailScreen(animal, onBack = { onBackPressed() })
+                }
             }
         }
+    }
+
+    override fun finish() = super.finish().also { transitionBehavior.onFinishTransitions() }
+
+    companion object {
+        const val EXTRA_FOR_ANIMAL_ID = "EXTRA_FOR_ANIMAL_ID"
     }
 }

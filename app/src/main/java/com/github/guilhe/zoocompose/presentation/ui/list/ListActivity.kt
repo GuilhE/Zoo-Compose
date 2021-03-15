@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.guilhe.zoocompose.presentation.ui.main
+package com.github.guilhe.zoocompose.presentation.ui.list
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,11 +22,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.ExperimentalAnimationApi
 import com.github.guilhe.zoocompose.presentation.theme.AppTheme
-import com.github.guilhe.zoocompose.presentation.ui.list.ListActivity
+import com.github.guilhe.zoocompose.presentation.ui.detail.DetailActivity
+import com.github.guilhe.zoocompose.presentation.ui.detail.DetailActivity.Companion.EXTRA_FOR_ANIMAL_ID
+import com.github.guilhe.zoocompose.presentation.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class ListActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -35,12 +37,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-//                ZooWithNavHostMultiComposable(viewModel)
-//                ZooWithNavHostSingleComposable(viewModel)
-                ZooWithOutNavHost(
-                    onEnter = {
-                        startActivity(Intent(this@MainActivity, ListActivity::class.java))
-                        finish()
+                AnimalScreen(
+                    viewModel,
+                    onSelected = {
+                        startActivity(Intent(this@ListActivity, DetailActivity::class.java).apply { putExtra(EXTRA_FOR_ANIMAL_ID, it.name) })
                     }
                 )
             }

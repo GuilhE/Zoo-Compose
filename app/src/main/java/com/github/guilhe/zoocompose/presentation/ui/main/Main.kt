@@ -15,6 +15,7 @@
  */
 package com.github.guilhe.zoocompose.presentation.ui.main
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -34,22 +35,16 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import com.github.guilhe.zoocompose.data.model.Animal
+import com.github.guilhe.zoocompose.presentation.navigation.Screen
 import com.github.guilhe.zoocompose.presentation.ui.detail.AnimalDetailScreen
 import com.github.guilhe.zoocompose.presentation.ui.list.AnimalScreen
 import com.github.guilhe.zoocompose.presentation.ui.welcome.WelcomeScreen
 
-sealed class Screen(val route: String) {
-    object Welcome : Screen("welcome")
-    object List : Screen("list")
-    object Detail : Screen("detail") {
-        const val routeWithArgument: String = "detail/{id}"
-        const val argument0: String = "id"
-    }
-}
-
 @Composable
-fun Zoo(viewModel: MainViewModel) {
+fun ZooWithNavHostMultiComposable(viewModel: MainViewModel) {
     val controller = rememberNavController()
+    BackHandler(onBack = { controller.navigateUp() })
+
     NavHost(navController = controller, startDestination = Screen.Welcome.route) {
         composable(route = Screen.Welcome.route) {
             WelcomeScreen {
@@ -64,7 +59,7 @@ fun Zoo(viewModel: MainViewModel) {
         ) {
             it.arguments?.getInt(Screen.Detail.argument0)?.let { id ->
                 viewModel.animalList.firstOrNull { item -> item.name == id }?.let { animal ->
-                    AnimalDetailScreen(animal, onBack = { controller.popBackStack() })
+                    AnimalDetailScreen(animal, onBack = { controller.navigateUp() })
                 }
             }
         }
@@ -73,13 +68,24 @@ fun Zoo(viewModel: MainViewModel) {
 
 @ExperimentalAnimationApi
 @Composable
-fun ZooSingleComposable(viewModel: MainViewModel) {
-    NavHost(navController = rememberNavController(), startDestination = Screen.Welcome.route) {
-        composable(route = Screen.Welcome.route) {
-            var welcomeVisible by rememberSaveable { mutableStateOf(true) }
-            var detailVisible by rememberSaveable { mutableStateOf(false) }
-            var animal by rememberSaveable { mutableStateOf<Animal?>(null) }
+fun ZooWithNavHostSingleComposable(viewModel: MainViewModel) {
+    val controller = rememberNavController()
+    var welcomeVisible by rememberSaveable { mutableStateOf(true) }
+    var detailVisible by rememberSaveable { mutableStateOf(false) }
+    var animal by rememberSaveable { mutableStateOf<Animal?>(null) }
 
+    BackHandler(
+        onBack = {
+            if (detailVisible) {
+                detailVisible = false
+            } else {
+                controller.navigateUp()
+            }
+        }
+    )
+
+    NavHost(navController = controller, startDestination = Screen.Welcome.route) {
+        composable(route = Screen.Welcome.route) {
             AnimatedVisibility(visible = true, initiallyVisible = false, enter = fadeIn(), exit = fadeOut()) {
                 AnimalScreen(viewModel) {
                     animal = it
@@ -112,4 +118,9 @@ fun ZooSingleComposable(viewModel: MainViewModel) {
             }
         }
     }
+}
+
+@Composable
+fun ZooWithOutNavHost(onEnter: () -> Unit) {
+    WelcomeScreen(onEnter)
 }
